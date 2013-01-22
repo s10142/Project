@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
@@ -79,6 +74,7 @@ public class Hash extends Thread
         }
         Main.buttonSet4(false);
         Main.buttonSet3(true);
+        return;
     }
     
     

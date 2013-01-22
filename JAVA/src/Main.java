@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 import java.io.File;
 import javax.swing.JFileChooser;
 
@@ -16,7 +11,7 @@ public class Main extends javax.swing.JFrame {
      * Creates new form Main
      */
     
-    public static Hash t = new Hash();
+    public static Hash t;
     
     public static void clear()
     {
@@ -93,12 +88,16 @@ public class Main extends javax.swing.JFrame {
         jButton4.setEnabled(false);
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                try {
+					jButton4ActionPerformed(evt);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
 
-        jButton5.setText("IRC");
-        jButton5.setEnabled(false);
+        jButton5.setText("ANIDB");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -183,16 +182,17 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         clear();
-        
-        t.start();
         buttonSet3(false);
-        buttonSet4(true);        
+        buttonSet4(true);  
+        t = new Hash();
+        t.start();      
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    @SuppressWarnings("deprecation")
+	private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) throws InterruptedException {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         
-        t.stop();
+    	t.stop();
         append("    Przerwano hashowanie");
         buttonSet4(false);
         buttonSet3(true);
@@ -201,33 +201,7 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
    // TODO add your handling code here:
-        /*
-        try 
-        {    
-            IRC.IRC();
-            IRC.Send("auth zigi90 qwertyqaz");
-            Connection conn = DB.initDB(); 
-            try
-            {
-                Statement st = conn.createStatement();
-                ResultSet rs;
-                rs = st.executeQuery("SELECT size, hash FROM files WHERE hash IS NOT NULL AND newname IS NULL ORDER BY id;");
-                while (rs.next())
-                {
-                    IRC.Send("!addfile ed2k://|file||"+rs.getString(1)+"|"+rs.getString(2)+"|/");
-                    Thread.sleep(10000);
-                                        
-                }
-                rs.close();
-                st.close();
-            }
-            catch (SQLException ex) 
-            {}
-        } catch (Exception ex) 
-        {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        */
+       
     }//GEN-LAST:event_jButton5ActionPerformed
     
     /**

@@ -1,9 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -48,8 +42,7 @@ public class FileHandler {
         
     public static void crawl(File file)
     {
-        if(file.isDirectory())
-           
+        if(file.isDirectory())   
         {
             File files[]=file.listFiles();
             for(File x : files)
