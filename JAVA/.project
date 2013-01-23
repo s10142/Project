@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/junit-4.10.jar</name>
+			<type>1</type>
+			<locationURI>PROJECT_LOC/junit-4.10.jar</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>
