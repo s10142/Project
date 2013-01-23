@@ -1,9 +1,4 @@
 import java.io.File;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -15,28 +10,7 @@ public class FileHandler {
     {
         if(file.exists())
         {
-            Connection conn = DB.initDB();
-            try
-            {
-                Main.append("Dodawanie "+file.getAbsolutePath()+":");
-                Statement st = conn.createStatement();
-                st.execute("INSERT INTO files (path,size) VALUES ('"+file.getAbsolutePath()+"','"+file.length()+"')");
-                st.close();
-                Main.append("     Dodano "+file.getAbsolutePath()+"");
-            } 
-            catch (SQLException ex) 
-            {
-                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-                Main.append("     Plik już w bazie lub coś poszło nie tak"); 
-            }
-            try 
-            {
-                conn.close();
-            } 
-            catch (SQLException ex) 
-            {
-                Logger.getLogger(FileHandler.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        	DB.addFile(file);
         } else Main.append("Plik nie istnieje");
     }
         

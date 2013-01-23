@@ -1,4 +1,5 @@
 import java.io.File;
+
 import javax.swing.JFileChooser;
 
 /**
@@ -98,6 +99,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         jButton5.setText("ANIDB");
+        jButton5.setEnabled(false);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -199,9 +201,9 @@ public class Main extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-   // TODO add your handling code here:
-       
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) 
+    {
+    	
     }//GEN-LAST:event_jButton5ActionPerformed
     
     /**

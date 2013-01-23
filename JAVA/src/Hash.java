@@ -1,11 +1,8 @@
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
+
 import jonelo.jacksum.JacksumAPI;
 import jonelo.jacksum.algorithm.AbstractChecksum;
 
@@ -41,37 +38,29 @@ public class Hash extends Thread
     
     public void run()
     {
-        Connection conn = DB.initDB(); 
-        try 
-        {
-            Statement st1 = conn.createStatement();
-            ResultSet rs;
-            rs = st1.executeQuery("SELECT path FROM files WHERE hash ISNULL ORDER BY id;");
-            while (rs.next())
-            {
-                Main.append("Rozpoczyna hashowanie "+rs.getString(1)+":");
-                String hash = Hash.hash(rs.getString(1)).substring(0, 32);
-                Main.append("   Hash to "+hash);
-                try
-                {
-                    Statement st2 = conn.createStatement();
-                    Main.append("   Pr√≥ba dodania do bazy:");
-                    st2.execute("UPDATE files SET hash='"+hash+"' WHERE path='"+rs.getString(1)+"';"); 
-                    Main.append("       Dodano do bazy");
-                }
-                catch (SQLException ex) 
-                {
-                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-                    Main.append("       Nie dodano do bazy zajrzyj do kodu");
-                }
-            }
-            rs.close();
-            st1.close();
-        } 
-        catch (SQLException ex) 
-        {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    	ArrayList<String> l = new ArrayList<String>();
+		try {
+			l = DB.selHash();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (l.size()!=0)
+		{
+	        for (int i=0;i<l.size();i++)
+	        {
+	        	Main.append("Rozpoczyna hashowanie "+l.get(i)+":");
+	        	String hash = Hash.hash(l.get(i));
+	            Main.append("   Hash to "+hash.substring(0, 32));
+	            try {
+					DB.addHash(hash.substring(0, 32), l.get(i));
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	        }
+		}
+		else Main.append("Brak plikÛw do hashowania");
         Main.buttonSet4(false);
         Main.buttonSet3(true);
         return;
